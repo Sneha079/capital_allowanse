@@ -14,7 +14,6 @@ export default function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("button clicked");
     setEmailError("");
     setPasswordError("");
     let isValid = true;
@@ -40,7 +39,7 @@ export default function LoginForm() {
         body: JSON.stringify({ contact_email: email, password }),
       });
       const data = await response.json();
-      console.log(data);
+      
 
       if (!data.success) {
         setPasswordError(data.message);

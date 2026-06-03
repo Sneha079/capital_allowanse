@@ -1,5 +1,7 @@
 "use client";
 
+import Header from "@/components/Header";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function PeoplePage() {
@@ -17,6 +19,7 @@ export default function PeoplePage() {
 
   return (
     <div className="p-8">
+        {/* <Header/> */}
       <h1 className="text-2xl font-bold">Clients</h1>
 
       {/* <pre>
@@ -25,6 +28,7 @@ export default function PeoplePage() {
       <table className="w-full border">
         <thead>
           <tr className="bg-teal-700 text-white">
+            <th className="p-3 text-left">ID</th>
             <th className="p-3 text-left">Name</th>
             <th className="p-3 text-left">Email</th>
             <th className="p-3 text-left">Phone</th>
@@ -33,8 +37,20 @@ export default function PeoplePage() {
           </tr>
         </thead>
         <tbody>
-          {clients.map((client: any) => (
-            <tr key={client._id} className="border-b border-gray-300 hover:bg-gray-100">
+          {clients.map((client: any, index) => (
+            <tr
+              key={client._id}
+              className="border-b border-gray-300 hover:bg-gray-100"
+            >
+              {/* <td className="p-3">{client._id}</td> */}
+              <td
+              
+              className="p-3">
+                <Link href={`/client/${client._id}`}
+                className="text-blue-500 hover:underline">
+                     {index + 1}
+              </Link>
+               </td>
               <td className="p-3">{client.name}</td>
 
               <td className="p-3">{client.contact_email}</td>

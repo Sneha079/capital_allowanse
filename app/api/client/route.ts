@@ -18,3 +18,27 @@ export async function GET() {
     });
   }
 }
+
+
+//post api
+
+export async function POST(request: Request) {
+  try {
+    await connectDB();
+
+    const body = await request.json();
+
+    const client = await Client.create(body);
+
+    return Response.json({
+      success: true,
+      data: client,
+    });
+  } catch (error: any) {
+    return Response.json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
