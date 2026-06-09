@@ -1,9 +1,9 @@
 "use client";
-import Header from "@/components/Header";
+// import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import { usePathname } from "next/navigation";
 
-export default function ClientLayout({
+export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export default function ClientLayout({
     <>
     
 <Navbar/>
-      {pathname !== "/client" && <Header />}
+      
 
       <main>{children}</main>
     </>

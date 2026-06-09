@@ -1,15 +1,14 @@
 export default function ClientsideBar() {
   const menuItems = [
     "General",
-    "Address and Contact",
-    "Administration",
-    "Personal",
-    "Work Schedule",
+    // "Address and Contact",
+    // "Administration",
+    // "Personal",
+    // "Work Schedule",
   ];
 
   return (
     <div className="w-[300px] bg-white border border-gray-100 rounded-md overflow-hidden shadow-sm">
-
       {menuItems.map((item, index) => (
         <div
           key={item}
@@ -24,7 +23,6 @@ export default function ClientsideBar() {
           <span>›</span>
         </div>
       ))}
-
     </div>
   );
 }

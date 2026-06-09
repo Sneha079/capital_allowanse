@@ -8,12 +8,14 @@ type InputFieldProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
   disabled?: boolean;
+  placeholder?: string;
 };
 
 const InputField = ({
   label,
   value,
   onChange,
+  placeholder,
   type = "text",
   disabled = false,
 }: InputFieldProps) => {
@@ -28,7 +30,8 @@ const InputField = ({
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className="w-full h-[52px] border border-gray-300 rounded-xl px-4 outline-none focus:border-teal-600 focus:ring-1 focus:ring-teal-600"
+        className="w-full h-[52px] border border-gray-300 rounded-xl px-4 outline-none focus:border-teal-600 
+        focus:ring-1 focus:ring-teal-600"
       />
     </div>
   );
@@ -37,7 +40,7 @@ const InputField = ({
 export default function ClientForm({ client }: { client?: any }) {
   const searchParams = useSearchParams();
   const isEditMode = !client || searchParams.get("edit") === "true";
-  const [id, setId] = useState(client?._id || "");
+  const [id, setId] = useState(client?.company_id || "");
   const [name, setName] = useState(client?.name || "");
   const [companyNumber, setCompanyNumber] = useState(
     client?.company_number || "",
@@ -52,9 +55,9 @@ export default function ClientForm({ client }: { client?: any }) {
 
   const handleSave = async () => {
     try {
-      const url = client?._id ? `/api/client/${client._id}` : "/api/client";
+      const url = client?.company_id ? `/api/client/${client.company_id}` : "/api/client";
 
-      const method = client?._id ? "PUT" : "POST";
+      const method = client?.company_id ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
@@ -62,6 +65,7 @@ export default function ClientForm({ client }: { client?: any }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          company_id: id,
           name,
           company_number: companyNumber,
           contact_email: email,
@@ -78,13 +82,12 @@ export default function ClientForm({ client }: { client?: any }) {
 
       if (data.success) {
         alert(
-          client?._id
+          client?.company_id
             ? "Client updated successfully!"
             : "Client saved successfully!",
         );
 
-        
-        if (!client?._id) {
+        if (!client?.company_id) {
           setId("");
           setName("");
           setCompanyNumber("");
@@ -106,31 +109,33 @@ export default function ClientForm({ client }: { client?: any }) {
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 w-full">
-      
       <div className="grid grid-cols-2  gap-x-6 gap-y-15">
         <InputField
-          label="Client ID"
+          label="Client ID *"
+          
           value={id}
           onChange={(e) => setId(e.target.value)}
           disabled={!isEditMode}
         />
 
         <InputField
-          label="Client Name"
+          label="Client Name *"
+          placeholder="Client or company name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           disabled={!isEditMode}
         />
 
         <InputField
-          label="Company Number"
+          label="Company Number *"
+          placeholder="Companies House number"
           value={companyNumber}
           onChange={(e) => setCompanyNumber(e.target.value)}
           disabled={!isEditMode}
         />
 
         <InputField
-          label="Contact Email"
+          label="Contact Email *"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -138,21 +143,21 @@ export default function ClientForm({ client }: { client?: any }) {
         />
 
         <InputField
-          label="Contact Phone"
+          label="Contact Phone *"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           disabled={!isEditMode}
         />
 
         <InputField
-          label="County"
+          label="County *"
           value={county}
           onChange={(e) => setCounty(e.target.value)}
           disabled={!isEditMode}
         />
 
         <InputField
-          label="Address 1"
+          label="Address 1 *"
           value={address1}
           onChange={(e) => setAddress1(e.target.value)}
           disabled={!isEditMode}
@@ -166,14 +171,14 @@ export default function ClientForm({ client }: { client?: any }) {
         />
 
         <InputField
-          label="Postcode"
+          label="Postcode *"
           value={postcode}
           onChange={(e) => setPostcode(e.target.value)}
           disabled={!isEditMode}
         />
 
         <InputField
-          label="Password"
+          label="Password *"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

@@ -12,7 +12,9 @@ export default async function ClientDetails({
 
   await connectDB();
 
-  const client = await Client.findById(id);
+   const client = await Client.findOne({
+    company_id: id,
+  });
 
   return (
      <ClientData

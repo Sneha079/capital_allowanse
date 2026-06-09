@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Users } from "lucide-react";
+import { Home, Layers, Users } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -33,6 +33,19 @@ export default function Navbar() {
         >
             <Users size={18}/>
             <span>Client</span>
+          
+        </Link>
+
+        <Link
+          href="/main-group"
+          className={` flex items-center gap-2 px-4 py-2 rounded-lg ${
+            pathname === "/main-group"
+              ? "bg-white/20"
+              : ""
+          }`}
+        >
+            <Layers size={18}/>
+            <span>Main Group</span>
           
         </Link>
 

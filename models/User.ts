@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
 
-const ClientSchema = new mongoose.Schema({
-   name: {
+const ClientSchema = new mongoose.Schema(
+  {
+    company_id: {
+      type: "String",
+      required: true,
+      unique: true,
+    },
+    name: {
       type: String,
       required: true,
     },
-
     company_number: {
       type: String,
       required: true,
@@ -43,14 +48,11 @@ const ClientSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    },
-{
+  },
+  {
     timestamps: true,
-  }
-
+  },
 );
-const Client =
-  mongoose.models.Client ||
-  mongoose.model("Client", ClientSchema);
+const Client = mongoose.models.Client || mongoose.model("Client", ClientSchema);
 
 export default Client;
