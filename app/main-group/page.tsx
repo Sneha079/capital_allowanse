@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useEffect, useState } from "react";
 import MainGroupToolbar from "@/components/main-group/MainGroupToolbar";
 type MainGroup = {
@@ -29,78 +28,77 @@ export default function MainGroupPage() {
       }
     }
   };
-  const handleSave = async () => {
-    try {
-      const url = isNewMode
-        ? "/api/main-group"
-        : `/api/main-group/${selectedGroup.main_group_code}`;
+  // const handleSave = async () => {
+  //   try {
+  //     const url = isNewMode
+  //       ? "/api/main-group"
+  //       : `/api/main-group/${selectedGroup.main_group_code}`;
 
-      const method = isNewMode ? "POST" : "PUT";
+  //     const method = isNewMode ? "POST" : "PUT";
 
-      const response = await fetch(url, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          main_group_code: selectedGroup.main_group_code,
-          main_group_description: selectedGroup.main_group_description,
-        }),
-      });
+  //     const response = await fetch(url, {
+  //       method,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         main_group_code: selectedGroup.main_group_code,
+  //         main_group_description: selectedGroup.main_group_description,
+  //       }),
+  //     });
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (data.success) {
-        alert(
-          isNewMode ? "Main Group Added Successfully" : "Updated Successfully",
-        );
+  //     if (data.success) {
+  //       alert(
+  //         isNewMode ? "Main Group Added Successfully" : "Updated Successfully",
+  //       );
 
-        fetchGroups();
+  //       fetchGroups();
 
-        setIsEditMode(false);
-        setIsNewMode(false);
+  //       setIsEditMode(false);
+  //       setIsNewMode(false);
 
-        setSelectedGroup(null);
-      } else {
-        alert(data.message);
-      }
-    } catch (error) {
-      alert("Update failed");
-    }
-  };
+  //       setSelectedGroup(null);
+  //     } else {
+  //       alert(data.message);
+  //     }
+  //   } catch (error) {
+  //     alert("Update failed");
+  //   }
+  // };
 
-  const handleDelete = async () => {
-    if (!selectedGroup) {
-      alert("please select a record");
-      return;
-    }
-    const ok = confirm("Are you sure you want to delete this record?");
+  // const handleDelete = async () => {
+  //   if (!selectedGroup) {
+  //     alert("please select a record");
+  //     return;
+  //   }
+  //   const ok = confirm("Are you sure you want to delete this record?");
 
-    if (!ok) return;
-    try {
-      const response = await fetch(`/api/main-group/${selectedGroup._id}`, {
-        method: "DELETE",
-      });
-      const data = await response.json();
-      console.log(data);
+  //   if (!ok) return;
+  //   try {
+  //     const response = await fetch(`/api/main-group/${selectedGroup._id}`, {
+  //       method: "DELETE",
+  //     });
+  //     const data = await response.json();
 
-      if (data.success) {
-        alert("Deleted Successfully");
+  //     if (data.success) {
+  //       alert("Deleted Successfully");
 
-        await fetchGroups();
-      } else {
-        alert(data.message);
-      }
-    } catch (error) {
-      alert("Delete failed");
-    }
-  };
+  //       await fetchGroups();
+  //     } else {
+  //       alert(data.message);
+  //     }
+  //   } catch (error) {
+  //     alert("Delete failed");
+  //   }
+  // };
 
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-6">Main Groups</h1>
 
-      <MainGroupToolbar
+      {/* <MainGroupToolbar
         onNew={() => {
           setIsNewMode(true);
           setSelectedGroup({ main_group_code: "", main_group_description: "" });
@@ -115,7 +113,7 @@ export default function MainGroupPage() {
         onDelete={handleDelete}
         onSave={handleSave}
         showSave={isEditMode || isNewMode}
-      />
+      /> */}
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
         <table className="w-full">
